@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>判断一个数是偶数还是奇数，并输出判断结果；</title>
+	<script>
+		document.addEventListener('DOMContentLoaded',()=>{
+			var input = document.querySelector('input');
+			var btnCheck = document.querySelector('button');
+			btnCheck.onclick=function(){
+				var num=Number(input.value);
+				if(num%2===0){
+					alert(num+'为偶数')
+				}else{
+					alert(num+'为奇数')
+				}
+			}
+		})
+	</script>
+</head>
+<body>
+	<input type="number">
+	<button>Check</button>
+</body>
+</html>

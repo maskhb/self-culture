@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>轮播图</title>
+</head>
+
+<body>
+    <img src="img/g1.jpg">
+    <button>暂停</button>
+    <script>
+    var img = document.querySelector('img');
+    var btn = document.querySelector('button');
+    var time = 1;
+    var timer = setInterval(carousel, 500)
+
+    function carousel() {
+        time++;
+        if (time > 5) {
+            time = 1
+        }
+        img.src = "img/g" + time + ".jpg"
+    }
+
+    btn.onclick = function() {
+        if (timer) {
+            clearInterval(timer);
+            timer = undefined;
+            btn.innerHTML = "继续";
+        } else {
+            timer = setInterval(carousel, 500);
+            btn.innerHTML = "暂停";
+        }
+    }
+    </script>
+</body>
+
+</html>

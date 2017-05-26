@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>传参后</title>
+	<script>
+		var str = location.search.substring(1);
+		var arr = str.split("&");//通过split变成数组
+		var obj = {};
+		arr.forEach(function(item){
+			var data = item.split("=");
+			obj[data[0]]= decodeURI(data[1])
+		})
+		console.log(obj)
+
+	</script>
+</head>
+<body>
+	<h1>列表</h1>
+	<img src="../08Math&Date/img/g5.jpg">
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Inherit</title>
+		<script type="text/javascript">
+			function Car(opt){
+				this.name = opt.name;
+				this.logo = opt.logo;
+				this.color = opt.color;
+				this.wheel = opt.wheel;
+			}
+			Car.prototype.move = function(){document.write('开车')};
+			Car.prototype.stop = function(){document.write('停车')};
+			
+			var bmw = new Car({
+				name:'x5',
+				logo:'BMW',
+				color:'白色',
+				wheel:4
+			});
+			
+			function Mobike(opt){
+				//继承属性:借用构造函数
+				//利用 call改变内部this指向
+				Car.call(this,opt);
+			}
+			//原型链继承
+			Mobike.prototype = new Car({});//!!key step
+			var lite = new Mobike({
+				name:'lite',
+				logo:'mobike',
+				color:'橙色',
+				wheel:2
+			})
+			
+			console.log(lite);
+			lite.move()
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        document.addEventListener('DOMContentLoaded',function(){
+        var arr = [{
+                label: "用户名",
+                name: "username",
+                type: "text"
+            }, {
+                label: "密码",
+                name: "password",
+                type: "password"
+            }, {
+                label: "性别",
+                name: "gender",
+                type: "select",
+                value: ['男', '女', '不男', '不女', 'Gay', '妖王']
+            }, {
+                label: "爱好", 
+                name: "hobby",
+                type: "checkbox",
+                value: ['篮球', '足球', '羽毛球', '兵乓球', '爬山', '购物', '旅游', '看美女']
+            }, {
+                label: '是否已婚',
+                name: 'married',
+                type: 'radio',
+                value: ['已婚', '未婚']
+            },
+            {
+                label: '简介',
+                name: 'resume',
+                type: 'textarea'
+            }];
+
+            var container = document.querySelector('div');
+            var form = document.createElement('form');
+            // container.appendChild('form');
+            // 循环遍历数组 拿出所有对象
+            arr.forEach(function(item){
+                //生成多个label
+                var label = document.createElement('label');
+                label.setAttribute('for',item.name);
+                label.innerHTML = item.label;
+                var p = document.createElement('p');
+                switch(item.type){
+
+                    case 'select': 
+                        input = document.createElement('selet');
+                        input.name = item.name;
+                        input.id   = item.name;
+
+                        input.innerHTML = item.value.map(function(opt){
+                            return '<option'+item.value+'>'+item.value+'</option>'
+                        }).join('')//数组转字符串;
+                    case 'textarea':
+                        input = document.createElement('textarea');
+                        input.name = item.name;
+                        input.id = item.name;
+                        break;
+                    case 'checkbox':
+                    case 'radio':
+                    //生成span标签包裹checkbox ||radio
+                        input = document.createElement('span');
+                        input.name = item.name;
+                        input.innerHTML = item.value.map(function(opt){
+                            return '<label><input type = '+item.type+' name = '+item.name+' value = '+opt+'>'+opt+'<label>'
+                        }).join('')
+                        break;
+                    default :
+                        input = document.createElement('input');
+                        input.type = item.type;
+                        input.name = item.name;
+                        input.id   = item.name;
+                }
+                    p.appendChild(label);
+                    p.appendChild(input);
+
+
+                    form.appendChild(p);
+            })
+                    container.appendChild(form)
+        })
+    </script>
+</head>
+    
+<body>
+    <div class="container">
+       <!--  <form>
+            <p>
+                <label for="username">用户名</label>
+                <input type="text" name="username" id="username">
+            </p>
+            <p>
+                <label for="password">密码</label>
+                <input type="password" name="password" id="password">
+            </p>
+            <p>
+                <label for="gender">性别</label>
+                <select name="gender" id="gender">
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                    <option value="不男">不男</option>
+                    <option value="不女">不女</option>
+                    <option value="Gay">Gay</option>
+                    <option value="妖王">妖王</option>
+                </select>
+            </p>
+            <p>
+                <label for="hobby">爱好</label>
+                <span>
+                    <label>
+                    <input type="checkbox" name="hobby" value="篮球">篮球</label>
+                    <label><input type="checkbox" name="hobby" value="足球">足球</label>
+                    <label><input type="checkbox" name="hobby" value="羽毛球">羽毛球</label>
+                    <label><input type="checkbox" name="hobby" value="兵乓球">兵乓球</label>
+                    <label><input type="checkbox" name="hobby" value="爬山">爬山</label>
+                    <label><input type="checkbox" name="hobby" value="购物">购物</label>
+                    <label><input type="checkbox" name="hobby" value="旅游">旅游</label>
+                    <label><input type="checkbox" name="hobby" value="看美女">看美女</label>
+                </span>
+            </p>
+            <p>
+                <label for="married">是否已婚</label>
+                <span>
+                    <label><input type="radio" name="married" value="已婚">已婚</label><label><input type="radio" name="married" value="未婚">未婚</label>
+                </span>
+            </p>
+            <p>
+                <label for="resume">简介</label>
+                <textarea name="resume" id="undefined"></textarea>
+            </p>
+        </form> -->
+    </div>
+</body>
+
+</html>

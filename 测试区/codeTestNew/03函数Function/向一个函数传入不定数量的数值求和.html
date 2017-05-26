@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>向一个函数传入不定数量的数值求和</title>
+	<script>
+		// 向一个函数传入不定数量的数值求和
+		function sum(){
+			var res = 0;
+			for(var i = 0;i<arguments.length;i++){
+				res+=arguments[i]
+			}
+			console.log(res)
+			return res;
+		}
+		sum(3,4,5,6,78,9,43,2,324,55);
+		sum(44,4,4,4,4,5,35,322,324,234,33);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

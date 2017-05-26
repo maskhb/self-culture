@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.box{width: 300px;height: 200px;background-color: #ccc;line-height: 200px;text-align: center;font-size: 22px;font-weight: bold;}
+	</style>
+	<script>
+		document.addEventListener('DOMContentLoaded',function(){
+			var box = document.querySelector('.box');
+			box.onmousedown = function(e){
+
+				if(e.button ===0){
+					box.innerText = '左键'
+				}else if(e.button ===1 ){
+					box.innerText ='滚轮键'
+				}else if(e.button ===2){
+					e.preventDefault();
+					box.innerText ='右键'
+				}
+			}
+
+		})
+	</script>
+</head>
+<body>
+	<div class="box">12</div>
+</body>
+</html>

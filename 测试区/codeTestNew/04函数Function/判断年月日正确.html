@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>年月日分别为自定义函数的参数，判断是否为正确的日期 错误日期：2016-11-31,2017-2-29,2016-13-20,2015-8-38
+    </title>
+    <style>
+    input {
+        width: 80px;
+    }
+    </style>
+    <script>
+    /*
+	年月日分别为自定义函数的参数，判断是否为正确的日期
+		错误日期：2016-11-31,2017-2-29,2016-13-20,2015-8-38
+	*/
+    document.addEventListener('DOMContentLoaded', () => {
+        var year = document.querySelector('input');
+        var month = year.nextElementSibling;
+        var day = month.nextElementSibling;
+        var btn = document.querySelector('button');
+        btn.onclick = function() {
+            var _month = month.value;
+            var _year = year.value;
+            fyear(_year);
+            checkYear();
+            checkMonth();
+            checkDay(checkMonth());
+        }
+
+        function fyear(_year) { //判断闰年
+            if ((_year % 4 == 0 && _year % 100 != 0) || _year % 400 == 0) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
+
+        function checkYear() {
+            var _year = year.value;
+            if (_year.length < 4 || _year.length > 4 || _year[0] == 0) {
+                alert('年份不对吧?')
+            }
+            return _year
+        }
+
+        function checkMonth() {
+            var _month = month.value;
+            if (!/^(1[0-2]|[1-9])$/.test(_month)) {
+                // if(!/^\d[1-12]$/.test(_month)){
+                alert('月份不对吧?');
+                return false;
+            }
+            return _month
+        }
+
+        function checkDay(y) {
+            var theday; //声明变量储存正确天数
+            if (y == 1 || y == 3 || y == 5 || y == 7 || y == 8 || y == 10 || y == 12) {
+                theday = 31;
+                console.log(theday)
+            } else if (y == 2) {
+                var _year = year.value;
+                var s = fyear(_year);
+                if (s == 1) {
+                    theday = 29;
+                } else {
+                    theday = 28;
+                }
+            } else {
+                theday = 30;
+                console.log(theday)
+            }
+            var _day = Number(day.value);
+            if (_day <= theday && _day >= 1) {
+                alert("是合法日期");
+            } else {
+                alert("日期有误吧!");
+            }
+        }
+    })
+    </script>
+</head>
+
+<body>
+    <input type="number">year
+    <input type="number">month
+    <input type="number">day
+    <button>Check</button>
+</body>
+
+</html>

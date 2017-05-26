@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>网页提交表单后的数据提取</title>
+    <script>
+    /*
+    			https://www.baidu.com/s?name=avery&age=20&sex=male
+    			取出name, age
+
+    			思路：
+    				1）截取?后的字符
+    					利用indexOf找出?所在的索引值
+    					substring()
+    				2）利用&分割成数组
+    					split()
+    				3）遍历数组，然后利用=分割成数组
+    					split()
+    		 */
+    var str = 'https://www.baidu.com/s?name=avery&sex=male&age=20&';
+
+    var startIdx = str.indexOf('?');
+    str = str.slice(startIdx + 1);
+    console.log(str);
+
+    //2）利用&分割成数组
+    //		split()
+    var arr = str.split('&');
+    console.log(arr);
+
+    // 3）遍历数组，然后利用=分割成数组
+    arr.forEach(function(item) {
+        var arr = item.split('=')
+
+        if (arr[0] === 'name' || arr[0] === 'age' || arr[0]=== 'sex') {
+            console.log(arr[0] + ': ' + arr[1])
+        }
+    })
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>编写生成4位数字验证码的函数，并显示在页面，点击重新生成验证码</title>
+	<style>
+		div{
+			width: 200px;height: 50px;background-color: #efefef;text-align: center;line-height: 50px;border: 3px solid #ccc;margin-top: 20px;
+		}
+	</style>
+	<script>
+		// 编写生成4位数字验证码的函数，并显示在页面，点击重新生成验证码
+		document.addEventListener('DOMContentLoaded',()=>{
+			var btnShow = document.querySelector('button');
+			var output = document.querySelector('div');
+			btnShow.onclick = randomNum;
+			function randomNum(){
+				var num =String(Math.floor(10000*Math.random()));
+				while(num.length<4){
+					num+='0'
+				}
+				output.innerHTML=num;
+			}
+			setInterval(function(){
+				for(i=0;i<=10000;i++){
+					randomNum();
+				}
+			},400)
+		})
+	</script>
+</head>
+<body>
+	<button>生成四位验证码</button>
+	<div></div>
+</body>
+</html>

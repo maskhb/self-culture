@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		img{width: 200px;}
+	</style>
+	<script>
+		document.addEventListener('DOMContentLoaded',function(){
+			var img = document.querySelector('img');
+			var btnClon = document.querySelectorAll('button')[0];
+			var btnReplace = document.querySelectorAll('button')[1];
+
+			btnClon.onclick = function(){
+				var clone = img.cloneNode(true);
+				// var imgNew = document.createElement(img); 克隆了就不用生成了不然算是自己写的新标签而已
+				img.parentNode.insertBefore(clone,img);
+			}	
+
+			btnReplace.onclick = function(){
+				var usd = document.createElement('img');
+				usd.src ='D:/h5_1701/javascript/DOM/img/100usd.jpg';
+				img.parentNode.replaceChild(usd,img.parentNode.children[0])
+
+			}
+		})
+	</script>
+</head>
+<body>
+	<button>克隆</button>
+	<button>替换</button>
+	<div class="box">
+		
+		<img src="D:/h5_1701/javascript/DOM/img/100rmb.jpg" />
+	</div>
+</body>
+</html>

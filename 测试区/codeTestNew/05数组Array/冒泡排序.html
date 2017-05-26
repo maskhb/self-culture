@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>冒泡排序</title>
+	<script>
+		/*
+		冒泡排序 把以下数组通过冒泡排序法排成从小到大的数组
+		[10,2,8,55,32,18,9,11,30,16,19,20]
+		*/
+		var data = [10,2,8,55,32,18,9,11,30,16,19,20];
+		for(var j = 0 ; j<data.length;j++){
+			console.log(j,'-------------------');
+			//这里的代码优化:-1的意思:从0开始计算 第一次减去j时候j=0 ,没意义;
+			//				 -j的意思:每次内层循环已经把最大值提取到右边,对于最右边的数值没必要继续排序;第一次外层循环跑完 内层可以少跑一次=>减去1 第二次=>减去2
+			for(var i = 0;i<data.length; i++){
+				var temp//创建临时变量
+				if(data[i]>data[i+1]){
+					temp = data[i];//临时储存
+					data[i] = data[i+1];
+					data[i+1] = temp;
+				}
+				 console.log(data.join())//  这里调用join()方法原因 数组直接输出最终结果
+			}
+
+		}
+		document.write('冒泡排序后显示为:'+'<br>'+data+'<br><br><br><br><br>')
+
+
+
+
+		//对arrNew逆序 从大到小
+		for(var k = 0;k<data.length;k++){	
+			for(var l = 0;l<data.length;l++){
+				var temp = [];//创建临时变量
+				if(data[l]<data[l+1]){
+					temp = data[l];
+					data[l] = data[l+1];//简写l+1
+					data[l+1]=temp;
+				}	
+			}
+		}
+		document.write('倒序后数组'+'<br>'+data)
+		
+		
+		
+//		分别计算出以上数组的最大值，最小值和平均值，并输出他们的索引
+		//逆序后最大值为data[0]最小值为data[data.length-1];
+		
+		document.write('<br><br><br><br>'+'逆序后最大值为'+data[0]+'最小值为'+data[data.length-1])
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

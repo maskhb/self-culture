@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+    .tab {
+        border: 1px solid #ddd;
+        width: 400px;
+        margin: 100px auto;
+    }
+    
+    .tab .title {
+        border-bottom: 2px solid #ddd;
+        overflow: hidden;
+        padding: 1px;
+        line-height: 2;
+    }
+    
+    .tab .title span {
+        float: left;
+        padding: 5px 15px;
+        border-right: 1px solid #ddd;
+    }
+    
+    .tab .title span.active {
+        background-color: #fc0;
+        color: #fff;
+    }
+    
+    .content {
+        display: none;
+        padding: 10px;
+        text-align: center;
+    }
+    </style>
+    <script src="../../jquery-3.2.1.js"></script>
+    <script type="text/javascript">
+    $(() => {
+        $('.title span').on('click', function() {
+            //1>清除所有active 隐藏所有图片
+            $('.title span').attr('class', '');
+            $('.content').css('display', 'none');
+            //2>给当前点击的添加active
+            $(this).attr('class', 'active');
+            //3>利用idx显示当前图片 index()搜索匹配的元素，并返回相应元素的索引值，从0开始计数。 
+            $('.content').eq($(this).index()).fadeToggle('slow');
+        })
+    })
+    </script>
+</head>
+
+<body>
+    <div class="tab">
+        <div class="title">
+            <span class="active">Tab1</span>
+            <span>Tab2</span>
+            <span>Tab3</span>
+            <span>Tab4</span>
+            <span>Tab5</span>
+        </div>
+        <div class="content" style="display:block"><img src="g1.jpg"></div>
+        <div class="content"><img src="g2.jpg"></div>
+        <div class="content"><img src="g3.jpg"></div>
+        <div class="content"><img src="g4.jpg"></div>
+        <div class="content"><img src="g5.jpg"></div>
+    </div>
+</body>
+
+</html>

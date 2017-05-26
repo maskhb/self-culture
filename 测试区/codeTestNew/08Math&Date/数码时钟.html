@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数码时钟</title>
+	<style>
+		div{
+			margin: 100px auto;
+			width: 400px;
+		}
+	</style>
+	<script>
+		/*
+		数码时钟
+			1> 获取img数组,根据下标获取值
+			2> 更换img的src属性
+
+		2-------获取时间
+		 */
+		document.addEventListener('DOMContentLoaded',()=>{
+			var numArr = document.querySelectorAll('img');//类数组
+
+			setInterval(showTime,1000);
+
+			showTime()
+			function showTime(){
+				var now = new Date();
+				var hour = now.getHours();
+				var min = now.getMinutes();
+				var sec = now.getSeconds();
+
+				numArr[0].src = 'img/'+ (hour<10 ? 0 : Math.floor(hour/10)) +'.png';
+				numArr[1].src = 'img/'+ (hour%10) +'.png';
+
+				numArr[2].src = 'img/'+ (min<10 ? 0 : Math.floor(min/10)) +'.png';
+				numArr[3].src = 'img/'+ (min%10) +'.png';
+
+				numArr[4].src = 'img/'+ (sec<10 ? 0 : Math.floor(sec/10)) +'.png';
+				numArr[5].src = 'img/'+ (sec%10) +'.png';
+			}
+			
+		})
+	</script>
+</head>
+<body>
+<div>
+	
+	<img src="img/0.png" >
+	<img src="img/0.png" >时
+	<img src="img/0.png" >
+	<img src="img/0.png" >分
+	<img src="img/0.png" >
+	<img src="img/0.png" >秒
+</div>
+</body>
+</html>

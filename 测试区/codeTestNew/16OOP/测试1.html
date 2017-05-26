@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			//			创建以下构造函数
+			//Cat: 猫
+			//属性：fur
+			//方法：eat; miaow
+			//GarfieldCat : 加菲猫
+			//属性：fur; glasses
+			//方法：eat; miaow; talk
+			//TomCat : 汤姆猫
+			//属性：fur; friend
+			//方法：eat; miaow; catchMouse
+			function createCat(name, skill, sound) {
+				var obj = {
+					name: name,
+					skill: skill,
+					sound: sound
+				}
+				return obj
+			}
+			var cat = createCat('cat', 'eat', 'miaow')
+			console.log(cat)
+			//GarfieldCat : 加菲猫
+			//属性：fur; glasses
+			//方法：eat; miaow; talk
+			function createGarfieldCat(name, attribute, skill) {
+				var obj = {
+					name: name,
+					attribute: attribute,
+
+					skill: skill
+
+				}
+				return obj
+			}
+			var GarfieldCat = createGarfieldCat('加菲猫', [{
+				'hair': 'ful',
+				'madeBy': 'glasses'
+			}], [{
+				'ican': 'eat',
+				'isoundLike': 'miaow',
+				'maybeican': 'talk'
+			}])
+			console.log(GarfieldCat.skill);
+			console.log(GarfieldCat.attribute)
+
+			function Student(name, age) {
+				this.name = name;
+				this.age = age;
+				this.sayName = function() {
+					alert(this.name);
+				};
+			}
+			var s1 = new Student("王铁锤", 18);
+		</script>
+	</head>
+
+	<body>
+	</body>
+
+</html>

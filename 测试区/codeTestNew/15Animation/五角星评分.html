@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>评分</title>
+	<style>
+		li{float: left;background:url(img/star.gif) 0 0 no-repeat; width: 27px;height: 27px;list-style: none;}
+		li.active{background-position:0 -29px;}
+	</style>
+	<script>
+		document.addEventListener('DOMContentLoaded',function(){
+			//获取元素
+			var ul = document.querySelector('ul');
+			var lis = ul.children;
+			var output= document.querySelector('div');
+			//绑定事件
+			ul.onmouseover = function(e){
+				if(e.target.tagName.toLowerCase()==='li'){
+					var currentIdx;
+					showStar(e.target);
+				}
+			}
+			function showStar(target){
+				//循环获取i,即idx
+				for(var i=0;i<=lis.length;i++){
+					if(lis[i]===target){
+						currentIdx=i;
+						break;
+					}
+				}
+				//循环添加高亮
+				for(var j=0;j<lis.length;j++){
+					if(j<=currentIdx){
+						lis[j].classList.add('active')
+					}else{
+						lis[j].classList.remove('active')
+					}
+				}
+			}
+
+			//点击显示评语
+			var arr = ['很差','差','一般','还行','挺好'];
+			ul.onclick=function(e){
+				e=e||window.event;
+				target = e.target||window.srcElement;
+				if(target.tagName.toLowerCase()==='li'){
+					showMsg(target)
+				}
+			}
+			function showMsg(target){
+				for(var i=0;i<lis.length;i++){
+                    if(lis[i] === target){
+                        output.innerHTML = arr[i];
+                        break;
+                    }
+                }
+			}
+
+		})
+	</script>
+</head>
+<body>
+	<ul>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+	<div></div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    ul {
+        list-style: none;
+    }
+    
+    li {
+        padding: 20px;
+        margin: 20px;
+        border-bottom: 1px dotted #f00;
+    }
+    
+    img {
+        width: 200px;
+    }
+    </style>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        var container = document.querySelector('ul');
+        var data = [{
+            name: 'iphone7 plugs',
+            price: 5899.00,
+            color: '土豪金',
+            img: 'img/ip7.jpg'
+        }, {
+            name: 'Note7',
+            price: 3899.00,
+            color: '黑色',
+            img: 'img/note7.jpg'
+        }, {
+            name: '荣耀7',
+            price: 1999.00,
+            color: '白色',
+            img: 'img/honor7.jpg'
+        }];
+        var html = data.map(function(goods) {
+            return html = '<li><img src = "' + goods.img + '"><h4>' +
+                goods.name + '</h4><p>' +
+                goods.price + '</p><p>' +
+                goods.color + '</p></a></li>';
+        }).join('')
+        console.log(html)
+        container.innerHTML = html;
+    })
+    </script>
+</head>
+
+<body>
+    <ul>
+    </ul>
+</body>
+
+</html>

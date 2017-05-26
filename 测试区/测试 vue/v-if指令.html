@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>Hello, Vue.js!</h1>
+        <!--数据的yes属性为true，所以"Yes!"会被输出；-->x
+        <h1 v-if="yes">Yes!</h1>
+        <!--数据的no属性为false，所以"No!"不会被输出；-->
+        <h1 v-if="no">No!</h1>
+        <!--运算式age >= 25返回true，所以"Age: 28"会被输出；-->
+        <h1 v-if="age >= 25">Age: {{ age }}</h1>
+        <!--运算式name.indexOf('jack') >= 0返回false，所以"Name: keepfool"不会被输出。-->
+        <h1 v-if="name.indexOf('jack') >= 0">Name: {{ name }}</h1>
+    </div>
+</body>
+<script src="vue.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            yes: true,
+            no: false,
+            age: 28,
+            name: 'keepfool'
+        }
+    })
+</script>
+
+</html>

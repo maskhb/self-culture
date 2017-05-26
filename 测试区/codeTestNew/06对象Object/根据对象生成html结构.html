@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>生成结构</title>
+    <style>
+    	ul{
+    		list-style: none;
+    	}
+    	li{padding: 20px;margin: 20px;border-bottom: 1px dotted #f00;}
+    	img{
+    		width: 200px;
+    	}
+    </style>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        var data = [{
+            name: 'iphone7 plugs',
+            price: 5899.00,
+            color: '土豪金',
+            img: 'img/ip7.jpg'
+        }, {
+            name: 'Note7',
+            price: 3899.00,
+            color: '黑色',
+            img: 'img/note7.jpg'
+        }, {
+            name: '荣耀7',
+            price: 1999.00,
+            color: '白色',
+            img: 'img/honor7.jpg'
+        }];
+
+        var goodsList = document.querySelector('ul');
+        var html = '';
+        //循环拼接li
+        for (var i = 0; i < data.length; i++) {
+            var goods = data[i];
+            html += `<li><img src=${goods.img}><h4>
+            ${goods.name} </h4><p>
+            ${goods.price} </p><p>
+            ${goods.color} </p></a></li>`;
+        }
+        goodsList.innerHTML = html
+    })
+    </script>
+</head>
+
+<body>
+    <ul>
+        <!-- <li><a href="#"><h4>name</h4><p>price</p><p>color</p></a></li> -->
+    </ul>
+</body>
+
+</html>

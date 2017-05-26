@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<button>按钮1</button>
+		<button>按钮2</button>
+		<button>按钮3</button>
+		<button>按钮4</button>
+		<button>按钮5</button>
+		<button>按钮6</button>
+		<button>按钮7</button>
+		<button>按钮8</button>
+		<button>按钮9</button>
+		<button>按钮10</button>
+	<script type="text/javascript">
+		var btns = document.querySelectorAll('button');
+		Array.prototype.forEach.call(btns,function(item){
+			console.log(item)
+		})
+		function sum(){
+			var res = 0
+			Array.prototype.forEach.call(arguments,function(item){
+				res+=item
+			})
+			return res
+		}
+		console.log(sum(1,2,3,21,321,3,21,321,3,213,3))
+	</script>
+	</body>
+</html>

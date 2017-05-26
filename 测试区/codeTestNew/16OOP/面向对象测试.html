@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			/*
+			 构造函数 小狗 3个动作
+			 */
+			var dog = new Object();
+			dog.smell = function() {
+				console.log('smell')
+			};
+			dog.lick = function() {
+				console.log('lick')
+			};
+			dog.bite = function() {
+				console.log('bite')
+			};
+
+			dog.smell();
+			dog.lick();
+			dog.bite();
+			
+			/*
+			 字面量 
+			 人
+			 有什么属性=>姓名\年龄\性别\
+			 能做什么=>学习\工作\玩
+			 */
+			var person = {name:'boolean',age:26,gender:'male'};
+			person.study = function(){console.log('study')};
+			person.work = function(){console.log('work')};
+			person.play = function(){console.log('play')};
+			person.study();
+			person.work();
+			person.play();
+			
+			/*
+			把京东购物车当作一个对象
+				1）创建并描述对象
+					* 对象有什么
+					* 对象能做什么
+				2）操作购物车
+		 */
+			var jdCar = {BuyMore:function(){},Del:function(){}};
+			jdCar.title = '购物车';
+			jdCar.totalPrice = 10000;
+			jdCar.changeQty = 'boolean';
+			jdCar.goods = [{},{},{}]
+			console.log(jdCar)
+			
+		</script>
+	</head>
+
+	<body>
+	</body>
+
+</html>

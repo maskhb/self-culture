@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>编写一个函数，计算三个数字的大小，按从小到大顺序输出</title>
+	<script>
+		document.addEventListener('DOMContentLoaded',()=>{
+			var num1= document.querySelector('input');
+			var num2= num1.nextElementSibling;
+			var num3= num2.nextElementSibling;
+			var btn = document.querySelector('button');
+			var output = document.querySelector('div');
+
+
+			btn.onclick=sort;
+			function sort(){
+				var a = Number(num1.value);
+				var b = Number(num2.value);
+				var c = Number(num3.value);
+
+				switch(true){
+					case a>b&&b>c:
+						output.innerHTML=a+'>'+b+'>'+c;
+						break;
+					case a>c&&c>b:
+						output.innerHTML=a+'>'+c+'>'+b;
+						break;
+					case b>c&&c>a:
+						output.innerHTML=b+'>'+c+'>'+a;
+						break;
+					case b>a&&a>c:
+						output.innerHTML=b+'>'+a+'>'+c;
+						break;
+					case c>a&&a>b:
+						output.innerHTML=c+'>'+a+'>'+b;
+						break;
+					case c>b&&b>a:
+						output.innerHTML=c+'>'+b+'>'+a;
+						break;
+				}
+			}
+		})
+	</script>
+</head>
+<body>
+	<input type="number" placeholder="num1">
+	<input type="number" placeholder="num2">
+	<input type="number" placeholder="num3">
+	<button>排序</button>
+	<div></div>
+	<p>数字不能相等</p>
+</body>
+</html>

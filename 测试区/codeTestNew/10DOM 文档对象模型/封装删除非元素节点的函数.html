@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>封装一个删除非元素节点的函数</title>
+	<script>
+
+		function getElement(nodes){//nodes为类数组
+			var res = [];
+			// 遍历节点，删除非元素节点
+			for(var i=0;i<nodes.length;i++){
+				if(nodes[i].nodeType === 1){
+					res.push(nodes[i]);
+				}
+			}
+			return res;
+		}
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

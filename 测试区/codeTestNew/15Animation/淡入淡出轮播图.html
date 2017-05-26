@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>渐现轮播图</title>
+		<style>
+			ul {
+				padding: 0;
+				margin: 0;
+				list-style: none;
+			}
+			
+			a {
+				text-decoration: none;
+			}
+			
+			#focus {
+				position: relative;
+				width: 810px;
+			}
+			
+			#bigpic {
+				position: relative;
+				width: 810px;
+				height: 320px;
+			}
+			
+			#bigpic li {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 810px;
+				height: 320px;
+				overflow: hidden;
+			}
+			
+			#smallpic {
+				position: relative;
+				left: 0;
+				margin-top: 10px;
+				overflow: hidden;
+			}
+			
+			#smallpic li {
+				float: left;
+				padding-right: 10px;
+			}
+			
+			#smallpic img {
+				width: 160px;
+			}
+			
+			.prev,
+			.next {
+				position: absolute;
+				top: 130px;
+				height: 60px;
+				width: 30px;
+				line-height: 60px;
+				text-align: center;
+				background-color: #f60;
+				color: #fff;
+				cursor: pointer;
+			}
+			
+			.prev {
+				left: 0;
+			}
+			
+			.next {
+				right: 0;
+			}
+			
+			.small-wrap {
+				width: 810px;
+				overflow: hidden;
+			}
+			
+			.small-wrap img {
+				cursor: pointer;
+			}
+		</style>
+		<script src="../common.js"></script>
+		<script>
+			document.addEventListener('DOMContentLoaded', () => {
+				var focus = document.querySelector('#focus');
+				var bigpic = focus.querySelector('#bigpic');
+				var bigList = bigpic.children;
+
+				// @生成html解构
+				// 复制所有图片作为小图
+				var smallpic = bigpic.cloneNode(true);
+				smallpic.id = 'smallpic';
+				var smallList = smallpic.children;
+
+				// 小图容器
+				var smallWrap = document.createElement('div');
+				smallWrap.classList.add('small-wrap');
+
+				smallWrap.appendChild(smallpic);
+				focus.appendChild(smallWrap);
+
+				// 左右按钮
+				var btnPrev = document.createElement('a');
+				btnPrev.classList.add('prev');
+				btnPrev.innerHTML = '&lt;'
+				var btnNext = document.createElement('a');
+				btnNext.classList.add('next');
+				btnNext.innerHTML = '&gt;'
+
+				focus.appendChild(btnPrev);
+				focus.appendChild(btnNext);
+
+				// @初始化
+
+				// 当前索引值
+				var idx = 0;
+
+				// 上一张索引值
+				var lastidx = 0;
+
+				var len = bigList.length;
+
+				// 大图：把除第一张图以外的图片透明度改成0
+				// 小图：把除第一张以外的图片透明度改成0.5
+				for(var i = 0; i < len; i++) {
+					if(i === 0) {
+						continue;
+					}
+					animate(bigList[i], {
+						opacity: 0
+					});
+					animate(smallList[i], {
+						opacity: 0.5
+					});
+				}
+
+				// 设置#smallList的宽度
+				var firstImg = smallList[0].querySelector('img');
+				var imgWidth;
+				firstImg.onload = function() {
+					imgWidth = firstImg.offsetWidth + 10;
+					smallpic.style.width = imgWidth * len + 'px';
+				}
+
+				// @淡入淡出效果
+				var timer = setInterval(autoPlay, 3000);
+
+				function autoPlay() {
+					idx++;
+
+					showPic();
+				}
+
+				function showPic() {
+					if(idx < 0) {
+						idx = len - 1;
+					} else if(idx > len - 1) {
+						idx = 0;
+					}
+
+					// 大图
+					animate(bigList[idx], {
+						opacity: 1
+					});
+					animate(bigList[lastidx], {
+						opacity: 0
+					});
+
+					// 小图
+					animate(smallList[idx], {
+						opacity: 1
+					});
+					animate(smallList[lastidx], {
+						opacity: 0.5
+					});
+
+					// 小图滚动
+					animate(smallpic, {
+						left: -imgWidth * idx
+					});
+
+					// 动画后
+					// 更新lastidx
+					lastidx = idx;
+				}
+
+				for(var i = 0; i < smallpic.children.length; i++) {
+					smallpic.children[i].setAttribute('data-idx', i)
+				}
+				//鼠标点击
+				smallpic.onclick = function(e) {
+					e = e || window.event;
+					var target = e.target || e.srcElement;
+					// 判断是否移入img标签
+					if(target.tagName.toLowerCase() === 'img') {
+						//获取idx
+						idx = target.parentNode.getAttribute('data-idx');
+
+						//赋值给idx
+						idx = idx;
+						//执行一次函数 
+						showPic()
+					}
+				}
+				// 鼠标移入移除
+				focus.onmouseenter = () => {
+					clearInterval(timer);
+				}
+				focus.onmouseleave = () => {
+					timer = setInterval(autoPlay, 2000);
+				}
+				// 前后按钮
+				focus.onclick = function(e) {
+					if(e.target.className == 'prev') {
+						idx--;
+						showPic();
+					} else if(e.target.className == 'next') {
+						idx++;
+						showPic();
+					} else if(e.target.tagName.toLowerCase() == 'span') {
+						idx = e.target.innerText - 1;
+						showPic();
+					}
+				}
+			})
+		</script>
+	</head>
+
+	<body>
+		<div id="focus">
+			<ul id="bigpic">
+				<li><img src="img/001.jpg"></li>
+				<li><img src="img/002.jpg"></li>
+				<li><img src="img/003.jpg"></li>
+				<li><img src="img/004.jpg"></li>
+
+				<li><img src="img/001.jpg"></li>
+				<li><img src="img/002.jpg"></li>
+				<li><img src="img/003.jpg"></li>
+				<li><img src="img/004.jpg"></li>
+
+			</ul>
+			<!-- <div class="small-wrap">
+            <ul id="smallpic">
+                <li><img src="img/001.jpg"></li>
+                <li><img src="img/002.jpg"></li>
+                <li><img src="img/003.jpg"></li>
+        
+                <li><img src="img/001.jpg"></li>
+                <li><img src="img/002.jpg"></li>
+                <li><img src="img/003.jpg"></li>
+        
+                <li><img src="img/001.jpg"></li>
+                <li><img src="img/002.jpg"></li>
+                <li><img src="img/003.jpg"></li>
+            </ul>
+        </div>
+        <a href="#" class="prev">&lt;</a>
+        <a href="#" class="next">&gt;</a> -->
+		</div>
+	</body>
+
+</html>
