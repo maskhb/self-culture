@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>节点方法</title>
+	<script>
+		document.addEventListener('DOMContentLoaded',function(){
+	
+		/*
+		e.nodeType
+			元素节点 <==> 1
+			文本节点 <==> 3
+			属性节点 <==> 2
+
+		获取方法
+			document.getElementById(''); 必须通过document调用
+			document.getElementsByName(''); 必须通过document调用
+			getElementsByTagName('');
+			getElementsByClassName('');
+
+		元素关系获取
+			ele.parentNode		父元素
+			ele.childNode		子元素
+			ele.firstChild		第一个子元素
+			ele.lastChild		最后一个子元素
+			ele.nextSibling		下一个
+			ele.previousSibling	 上一个
+		
+		元素属性
+			e.nodeType		返回节点的名称，根据其类型
+			e.nodeName		返回节点的类型
+			e.nodeValue 	返回节点的值（元素节点的nodeValue为null）
+
+		节点方法
+
+		创建：
+			document.createElement() 创建一个元素节点
+			document.createTextNode() 创建一个文本节点
+		插入：
+			parent.appendChild()  向节点的子节点列表的结尾添加新的子节点
+			parent.insertBefore(new,node)  在指定的子节点node前插入新的子节点new。
+		复制&替换
+			cloneNode(boolean)  复制节点，为true是深复制。
+			replaceChild(new,old) 将old节点替换为new节点
+		删除：
+			parent.removeChild(ele)  删除（并返回）当前节点parent的指定子节点ele。
+		判断：
+			parent.hasChildNodes() 判断当前节点是否拥有子节点,返回布尔值
+			ele.hasAttribute(attr) 判断当前元素是否拥有attr属性，返回布尔值
+		 */
+		
+
+		//创建节点
+			// 往body元素插入h1
+			// 1.创建一个h1元素
+			var body = document.body
+			var h1 = document.createElement('h1');
+			h1.innerHTML = 'test This';
+			body.appendChild(h1)
+		})
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

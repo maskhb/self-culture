@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>放大镜</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    ul {
+        margin: 100px auto;
+        list-style: none;
+        overflow: hidden;
+    }
+    
+    li {
+        margin-left: 100px;
+        float: left;
+    }
+    
+    #big {
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: none;
+        border: 3px solid #000;
+    }
+    </style>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var imgList = document.images;
+        var box = document.getElementById('box');
+        var big = document.getElementById('big');
+
+        //鼠标移入 需要冒泡
+        box.onmouseover = function(e) {
+            e = e || window.event;
+            var target = e.target || e.srcElement;
+            // 判断是否移入img标签
+            if (target.tagName.toLowerCase() === 'img') {
+                console.log(target.tagName)
+                //生成imgBig
+                imgBig = document.createElement('img');
+                imgBig.src = target.src.replace('.jpg', '_big.jpg');
+
+                //big相关设置
+                big.style.display = 'block';
+                big.style.left = e.clientX + 10 + 'px';
+                big.style.top = e.clientY + 10 + 'px';
+
+                //插入big
+                big.appendChild(imgBig);
+            }
+
+        }
+            // 鼠标移动事件
+        box.onmousemove = function(e) {
+            e = e || window.event;
+
+            var left = e.clientX + 10;
+            var top = e.clientY + 10;
+
+            // 当右侧的空间无法容纳当前大图时，显示在左侧
+            if (window.innerWidth - e.clientX <= big.offsetWidth + 10) {
+                left = e.clientX - big.offsetWidth - 10;
+            }
+
+
+            big.style.left = left + 'px';
+            big.style.top = top + 'px';
+        }
+
+        //鼠标移除 需要冒泡
+        box.onmouseout = function(e) {
+            e = e || window.event;
+            var target = e.target || e.srcElement;
+
+            if (target.tagName.toLowerCase() === 'img') {
+                var currentLi = target.parentElement;
+                // 隐藏大图
+                big.style.display = 'none';
+                big.innerHTML = '';
+            }
+        }
+        
+    })
+    </script>
+</head>
+
+<body>
+    <div id="box">
+        <ul>
+            <li><img src="../img/shirt_1.jpg"></li>
+            <li><img src="../img/shirt_2.jpg"></li>
+            <li><img src="../img/shirt_3.jpg"></li>
+            <li><img src="../img/shirt_4.jpg"></li>
+        </ul>
+    </div>
+    <div id="big"></div>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+    function jisuan() {
+        var num1 = document.getElementById('num1');
+        var num2 = document.getElementById('num2');
+        var a = num1.value;
+        var b = num2.value;
+        var output = document.getElementById('output');
+        if (a - b > 0) {
+            for (var i = 0; i <= b; i++) {
+                if (a % i === 0 && b % i === 0) {
+                    output.innerHTML = i;
+                }
+            }
+        } else {
+            for (var i = 0; i <= a; i++) {
+                if (a % i === 0 && b % i === 0) {
+                    output.innerHTML = i;
+                }
+            }
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <input type="text" id="num1">
+    <input type="text" id="num2">
+    <button onclick="jisuan()">最大公约数</button>
+    <div id="output"></div>
+</body>
+
+</html>

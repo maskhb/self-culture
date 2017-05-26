@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<script>
+			var array = [1, 2, 3, 4, 5]; // ---> 服务
+			//效率 ---> 针对一个有序的数组 效率最高
+			//标志 true false 
+			for(var j = 0; j < array.length - 1; j++) {
+				//- j 每次排序完成之后 后面减少比较的次数
+				var isTrue = true; //如果数组本身就是升序，则直接输出
+				for(var i = 0; i < array.length - j - 1; i++) {
+					if(array[i] > array[i + 1]) {
+						var temp = array[i];
+						array[i] = array[i + 1];
+						array[i + 1] = temp;
+						isTrue = false;
+					}
+				}
+				document.write(array);
+				if(isTrue) {
+					break;
+				}
+			}
+			var array = [12, 34, 4, 6, 20];
+			//length - 1 j = 0 - length - 1
+			for(var j = 0; j < array.length - 1; j++) {
+				var min = array[j]; // 1 3 34 4 345 5
+				var minIndex = j;
+				for(var i = j + 1; i < array.length; i++) {
+					if(array[i] < min) {
+						min = array[i];
+						minIndex = i;
+					}
+				}
+				if(minIndex != j) {
+					var temp = array[minIndex];
+					array[minIndex] = array[j];
+					array[j] = temp;
+				}
+			}
+			下面在看下Javascript实现三种排序： 冒泡排序、 选择排序、 插入排序的代码
+				<
+				script type = "text/javascript" >
+				var a;
+			a = [66, 53, 11, 5, 4, 3, 2, 1];
+			/*冒泡排序*/
+			(function maopaopaixu() {
+				for(var i = 0; i < a.length - 1; i++) { //比较的次数是length-1
+					for(var j = 0; j < a.length - 1 - i; j++) {
+						if(a[j] > a[j + 1]) {
+							var tmp = a[j];
+							a[j] = a[j + 1];
+							a[j + 1] = tmp;
+						}
+					}
+				}
+				alert(a);
+			})();
+			a = [66, 53, 11, 5, 4, 3, 2, 1];
+			/*选择排序*/
+			(function xuanzepaixu() {
+				var min /*最小项的索引*/ , tmp;
+				for(var out = 0; out < a.length - 1; out++) { //比较的次数是length-1
+					min = out;
+					for(var inner = out + 1; inner < a.length; inner++) { //这里是a.length，不是a.lenght-1，因为后者会导致右数第2项没法参与排序。
+						if(a[inner] < a[min]) {
+							min = inner;
+						}
+						//将最小的项移动到左侧
+						tmp = a[out];
+						a[out] = a[min]
+						a[min] = tmp;
+					}
+				}
+				alert(a);
+			})();
+			a = [66, 53, 11, 5, 4, 3, 2, 1];
+			/*插入排序*/
+			(function charupaixu() {
+				for(var out = 1; out < a.length; out++) {
+					var tmp = a[out];
+					var inner = out;
+					while(a[inner - 1] > tmp) {
+						a[inner] = a[inner - 1];
+						--inner;
+					}
+					a[inner] = tmp;
+				}
+				alert(a);
+			})();
+		</script>
+	</head>
+
+	<body>
+	</body>
+
+</html>

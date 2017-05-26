@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>一周内免登陆</title>
+	<style>
+		.welcome{display: none}
+	</style>
+	<script>
+		document.addEventListener('DOMContentLoaded',function(){
+			var btnLogin = document.querySelector('button');
+			var username = document.querySelectorAll('input')[0];
+			var psw = document.querySelector('#psw');
+			var info = document.querySelectorAll('div')[0];
+			var welcome = document.querySelectorAll('div')[1];
+
+			var _username;
+			var _psw;
+
+			//绑定点击事件
+			btnLogin.onclick = function(){
+				console.log('btnLogin点击')
+				_username = username.value;
+				_psw = psw.value;
+
+				// 把用户名，密码保存到cookie
+				// 保留7天
+				var now = new Date();
+				now.setDate(now.getDate()+7);
+				document.cookie = 'username=' + _username + ';expires=' + now;
+				document.cookie = 'password=' + _psw + ';expires=' + now;
+				showStaus(true);
+			}
+
+			//如果存在cookie 不用登录
+			var cookies = document.cookie;//这里直接用字符串判断没事
+			if(cookies.length){
+				console.log(cookies)
+				cookies = cookies.split('; ')//转换成数组
+				cookies.forEach(function(item){
+					var arr = item.split('=')//用等号拆分
+					if(arr[0]==='username'){_username = arr[1]};
+					if(arr[0]==='password'){_psw = arr[1]};
+				})
+				showStaus(true);
+			}
+
+
+			//封装跳转函数function showStaus
+			function showStaus(isLogin){//这里isLogin形参传入的是布尔值
+				//跳转到欢迎界面
+				if(isLogin){
+					welcome.style.display = 'block';
+					console.log(_username,_psw);
+					welcome.innerHTML = '您好，'+_username+'，欢迎登录<button>退出</button>';
+					info.style.display = 'none';
+				}else{
+					info.style.display = 'block';
+					welcome.style.display = 'none';
+				}
+			}
+
+
+			//点击清除cookie 通过设置有效时间
+			//这里注意!生成的元素利用冒泡+e.target绑定事件
+
+			welcome.onclick = function(e){
+				if(e.target.tagName.toLowerCase()==='button'){
+					var now = new Date();
+					now.setDate(now.getDate()-7);
+					document.cookie = 'username=null;expires='+now;
+					document.cookie = 'password=null;expires='+now;
+					showStaus();
+				}
+			}
+		})
+	</script>
+</head>
+<body>
+	<div>
+		<label for="username"></label><input type="text" id="username">用户名
+		<label for="psw"></label><input type="password" id="psw">密码
+		<button>登录</button>
+	</div>
+	<div class='welcome'>
+
+	</div>
+</body>
+</html>

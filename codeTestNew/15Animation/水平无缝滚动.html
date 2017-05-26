@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>09滚动轮播图</title>
+		<style>
+			ul {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+			
+			.carousel {
+				position: relative;
+				width: 810px;
+				height: 320px;
+				overflow: hidden;
+			}
+			
+			.carousel img {
+				display: block;
+			}
+			
+			.carousel ul {
+				position: absolute;
+				top: 0;
+				left: 0;
+				overflow: hidden;
+			}
+			
+			.carousel li {
+				float: left;
+			}
+		</style>
+		<script>
+			document.addEventListener('DOMContentLoaded', () => {
+				/*
+					水平无缝滚动
+					1）设置li浮动，并设置ul的宽度
+					2）每隔3s切换一张图片(动画)
+						* 不断改变ul的left值
+					3）无缝滚动
+						* 复制第一张图并放置到最后
+						* 当滚动到复制的这张图片时，瞬间把left值设为0
+				 */
+				var carousel = document.querySelector('.carousel');
+				var list = carousel.querySelector('ul');
+
+				// 复制第一张图并放置到最后
+				var copyLi = list.children[0].cloneNode(true);
+				list.appendChild(copyLi);
+
+				// 初始变量
+				var index = 0;
+				var len = list.children.length;
+				var firstImg = list.querySelector('img');
+				var imgWidth;
+
+				// 图片加载事件
+				// 图片加载完成后执行
+				firstImg.onload = () => {
+					imgWidth = firstImg.offsetWidth;
+					console.log(imgWidth);
+
+					// 置ul的宽度
+					// 为了能在同一行排列所有li
+					list.style.width = len * imgWidth + 'px';
+				}
+
+				// 滚动定时器
+				var scrollTimer;
+
+				// 3s切换一张图片
+				var timer = setInterval(autoPlay, 1000);
+
+				// 鼠标移入移除
+				carousel.onmouseenter = () => {
+					clearInterval(timer);
+				}
+				carousel.onmouseleave = () => {
+					timer = setInterval(autoPlay, 1000);
+				}
+
+				function autoPlay() {
+					index++;
+
+					showPic();
+				}
+
+				// 封装显示图片函数
+				function showPic() {
+					// 处理index值
+					if(index > len - 1) {
+						// 无缝滚动的关键：
+						// 当滚动到复制的这张图片时(最后一张图)，瞬间把left值设为0
+						// 并把index值设置为1
+						index = 1;
+
+						list.style.left = 0;
+					} else if(index < 0) {
+						index = len - 1;
+					}
+
+					// list.style.top = -320*index + 'px';
+
+					// 当前值
+					// var currentTop = list.offsetTop;
+
+					// 目标值
+					var target = -imgWidth * index;
+
+					// 在启动定时器之前，清除之前的定时器
+					clearInterval(scrollTimer);
+
+					scrollTimer = setInterval(() => {
+						var current = list.offsetLeft;
+
+						// 关键1：根据当前值计算速度
+						// 0->-320;-960->0
+						var speed = (current - target) / 3; //0.3=>1,-0.3=>-1
+
+						// 不允许速度为0
+						// 关键2：所以要向上/向下取整
+						speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+
+						// 关键3：判定条件
+						// 当滚动到目标值时，停止定时器
+						if(current == target) {
+							clearInterval(scrollTimer);
+
+							current = target + speed;
+						}
+
+						list.style.left = current - speed + 'px';
+
+					}, 30);
+				}
+			});
+		</script>
+	</head>
+
+	<body>
+		<div class="carousel">
+			<ul>
+				<li><img src="img/001.jpg" alt=""></li>
+				<li><img src="img/002.jpg" alt=""></li>
+				<li><img src="img/003.jpg" alt=""></li>
+				<li><img src="img/004.jpg" alt=""></li>
+			</ul>
+		</div>
+	</body>
+
+</html>

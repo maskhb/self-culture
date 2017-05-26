@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		document.addEventListener('DOMContentLoaded',function(){
+			var btn = document.querySelector('button');
+			//这里有一堆待传入的对象
+			var	obj = {
+				name:"huangbolin",
+				age:26,
+				gender:"male",
+				hobby:"coding"
+			}
+
+			btn.onclick = function(){
+				//对象循环提取数据 拼接成字符串 写入url
+				var res = "?";
+				for(var attr in obj){
+					res += attr +"="+ obj[attr]+"&"
+				}
+				res = res.slice(0,-1);
+				location.href="01chuancannew.html" + res
+			}
+		})
+	</script>
+</head>
+<body>
+	<button>跳转</button>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>15放大镜</title><style>
+		ul{padding:0;margin:0;list-style: none}
+		.small-list li{display: inline-block;}
+		.small-list img{width:60px;}
+		.zoom img{height:169px;}
+	</style>
+    <link rel="stylesheet" href="jquery.hbzoom.css" />
+    <script src="jquery-3.2.1.min.js"></script>
+    <script src="jquery.hbzoom.js"></script>
+    <script>
+        $(function(){
+			$('.zoom').gdszoom({
+				position:'right',
+			});
+
+			$('.small-list').on('click','img',function(){
+				$('.zoom img').attr({
+					src:this.src,
+					'data-big':this.src
+				});
+			})
+		})
+    </script>
+</head>
+<body>
+    <div class="zoom"><img src="img/car_min.png" data-big="img/car.jpg"></div>
+	<ul class="small-list">
+		<li><img src="img/g1.jpg" alt=""></li>
+		<li><img src="img/g2.jpg" alt=""></li>
+		<li><img src="img/g3.jpg" alt=""></li>
+		<li><img src="img/g4.jpg" alt=""></li>
+		<li><img src="img/g5.jpg" alt=""></li>
+	</ul>
+</body>
+</html>

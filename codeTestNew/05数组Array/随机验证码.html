@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>生成4位随机数字字母组合的验证码</title>
+	<script>
+		document.addEventListener('DOMContentLoaded',()=>{
+			var output = document.querySelector('input');
+			var btnCreate = output.nextElementSibling;
+			var data = [1,2,3,4,5,6,7,8,9,0,'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+
+			btnCreate.onclick = randomValue;
+			function randomValue(){
+				//循环生成随机验证码
+				var val = ''
+				for(var i =0;i<4;i++){
+					var n = Math.floor(Math.random()*data.length)
+					val+= data[n] 
+				}
+				output.value = val
+			}
+			
+		})
+	</script>
+</head>
+<body>
+	<input type="text" placeholder="这里输出数值"><button>Create</button>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>jQuery test</title>
+		<script src="../jquery-3.2.1.js"></script>
+		<script>
+			jQuery(document).ready(function() {
+				jQuery('#box');
+			});
+			//简化1
+			$(document).ready(function() {
+				//$('#box');
+			});
+			//简化2
+			$(function() {
+				console.log($('#box'));
+				console.log($.prototype);
+				$('#box').css('backgroundColor','#f00');
+				$('#box').css('width','200px');
+				$('#box').css('borderRadius','5px');
+				console.log($('#box').css('fontSize'));
+				$('#box').on('click',function(){
+					alert('呱呱呱呱呱呱呱呱呱呱呱呱')
+				})
+			})
+		</script>
+	</head>
+
+	<body>
+		<div id="box">哈哈哈哈哈哈</div>
+	</body>
+
+</html>

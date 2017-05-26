@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>js原生banner轮播</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <!--<link href="css/demo.css" rel="stylesheet">-->
+    <style type="text/css">
+        @charset "UTF-8";
+        /**
+         *
+         * @authors Your Name (you@example.org)
+         * @date    2016-02-02 09:12:03
+         * @version $Id$
+         */
+        * {
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+        }
+
+        body {
+            background: black;
+            color: white;
+        }
+
+        .parent {
+            width: 1000px;
+            height: 625px;
+            /*border: 1px solid red;*/
+            margin: 100px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .oul {
+            height: 625px;
+            width: 7000px;
+            position: absolute;
+            top: 0;
+        }
+
+        .oul li {
+            float: left;
+            height: 100%;
+            width: 1000px;
+        }
+
+        .oul li img {
+            height: 100%;
+            width: 100%;
+        }
+
+        #prev {
+            width: 50px;
+            height: 625px;
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #000 url(http://www.zxhuan.com/wp-content/uploads/2016/02/left.png) no-repeat left center;
+            transition: all 1s;
+        }
+
+        #prev:hover {
+            background-color: #fff;
+        }
+
+        #next:hover {
+            background-color: #fff;
+        }
+
+        #next {
+            width: 50px;
+            height: 625px;
+            display: block;
+            position: absolute;
+            right: 0;
+            top: 0;
+            background: #000 url(http://www.zxhuan.com/wp-content/uploads/2016/02/right.png) no-repeat right center;
+            transition: all 1s;
+        }
+
+        ul.us {
+            width: 200px;
+            height: 20px;
+            overflow: hidden;
+            position: absolute;
+            right: 60px;
+            bottom: 10px;
+        }
+
+        ul.us li {
+            width: 40px;
+            text-align: center;
+            height: 20px;
+            display: block;
+            float: left;
+            border-radius: 50%;
+            background: #F60;
+            opacity: 0.6;
+            transition: all 1s;
+        }
+        ul.us li a{
+            text-decoration:none;
+            color:white;
+        }
+        ul.us li.ls {
+            background: #09F;
+        }
+    </style>
+</head>
+<body>
+<div class='parent' id="parent">
+    <ul class='oul' id='oul' style="left:-1000px">
+        <li><img src="http://www.zxhuan.com/wp-content/uploads/2016/02/img5.jpg"></li>
+        <li><img src="http://www.zxhuan.com/wp-content/uploads/2016/02/img1.jpg"></li>
+        <li><img src="http://www.zxhuan.com/wp-content/uploads/2016/02/img2.jpg"></li>
+        <li><img src="http://www.zxhuan.com/wp-content/uploads/2016/02/img3.jpg"></li>
+        <li><img src="http://www.zxhuan.com/wp-content/uploads/2016/02/img4.jpg"></li>
+        <li><img src="http://www.zxhuan.com/wp-content/uploads/2016/02/img5.jpg"></li>
+        <li><img src="http://www.zxhuan.com/wp-content/uploads/2016/02/img1.jpg"></li>
+    </ul>
+    <a id="prev" href="javascript:void(0)"></a>
+    <a id="next" href="javascript:void(0)"></a>
+    <ul class="us" id='ous'>
+        <li class="ls"><a href="javascript:void(0)">1</a></li>
+        <li><a href="javascript:void(0)">2</a></li>
+        <li><a href="javascript:void(0)">3</a></li>
+        <li><a href="javascript:void(0)">4</a></li>
+        <li><a href="javascript:void(0)">5</a></li>
+    </ul>
+</div>
+<script type="text/javascript">
+    window.onload=function(){
+        var oPrev=document.getElementById('prev'),
+            oContainer=document.getElementById('parent'),
+            oNext=document.getElementById('next'),
+            oList=document.getElementById('oul'),
+            oBtn=document.getElementById('ous').getElementsByTagName('li'),
+            index= 1,//初始化按钮索引
+            timer=null,//初始化计时器
+            timers=null,//初始化计时器
+            interval=3000;//设置自动轮播的的事件
+        nowTime=+new Date();//初始化事件
+        oNext.onclick=function(){
+            animate(-1000);
+        }
+        oPrev.onclick=function(){
+            animate(1000);
+        }
+        function showBtn(index){
+            // console.log(oBtn);
+            for (var i = 0; i < oBtn.length ; i++) {
+                //小按钮对应当前图片
+                if( oBtn[i].className == 'ls'){
+                    oBtn[i].className = '';
+                    break;
+                }
+            }
+            oBtn[index-1].className = 'ls';
+        }
+        function animate(offset){
+            //当重复点击时间间隔超过800m时，执行函数；
+           // console.log(1)
+            if(+new Date()- nowTime>800){
+                var speed=0,//初始化速度
+                    oLeft=parseInt(oList.style.left)+offset;
+                //                debugger;
+                if(offset<0){
+                    if(index==5){
+                        index=0;
+                    }
+                    index++;
+                }else if(offset>0){
+                    index--
+                    if(index==0){
+                        index=5
+                    }
+                }
+                var runs=function(){
+                    //                clearTimeout(timer);
+                    speed=(oLeft-parseInt(oList.style.left))/10;//设置缓冲速度
+                    speed=(speed>0)?Math.ceil(speed):Math.floor(speed);
+                    if(parseInt(oList.style.left)>oLeft||parseInt(oList.style.left)<oLeft){
+                        oList.style.left=parseInt(oList.style.left)+speed+'px';
+                        timer=setTimeout(runs,8)//当条件不允许的时候，重复调用
+                    }else{
+                        if(oLeft<-5000){
+                            oList.style.left=offset+'px';
+                        }
+                        if(oLeft>-1000){
+                            oList.style.left=-5*offset+'px';
+                        }
+                    }
+                }
+                runs();
+                nowTime=new Date();
+                showBtn(index);
+            }
+        }
+        //点击按钮切换图片
+        for (var i = 0; i < oBtn.length; i++) {
+            oBtn[i].index=i;
+            oBtn[i].onclick = function () {
+                if(this.className == 'on') {
+                    return;
+                }
+                var myIndex = this.index+1;
+               // console.log(index);
+                var offset = -1000 * (myIndex - index);
+               // console.log(myIndex - index)
+                animate(offset);
+                index = myIndex;
+                showBtn(index);
+            }
+        }
+        oContainer.onmouseover = stop;
+        oContainer.onmouseout = play;
+        play();
+        function play() {
+            clearInterval(timers);//每次鼠标移开后，先清除定时器，重新开始计时，防止计时器的叠加！
+            timers = setInterval(function () {
+                oNext.onclick();
+                play();
+            }, interval);
+        }
+        function stop() {
+            clearInterval(timers);
+        }
+    }
+   var left =parseInt($("#oul").css('left')),
+           width=$('#oul').css('width'),
+           newtime=new Date();
+   $('#next').click(function(){
+       //当时间间隔大于1s时实行
+       if(new Date()-newtime>1000){
+           runs();
+           newtime=new Date();
+       }
+       //clearInterval(t);
+       console.log(left);
+   })
+   $('#prev').click(function(){
+       //当时间间隔大于1s时实行
+       if(new Date()-newtime>1000){
+           runs(0);
+           newtime=new Date();
+       }
+       console.log(left);
+   })
+   //设置定时器,自动轮播
+   var t=setInterval(function(){
+       runs();
+   },2000);
+   //鼠标经过next,prev是关闭定时器，移开是开启定时器；
+   $('#next').mouseover(function(){
+       clearInterval(t);
+   })
+   $('#prev').mouseover(function(){
+       clearInterval(t);
+   })
+   $('#next').mouseout(function(){
+       t=setInterval(function(){runs()},2000);
+   })
+   $('#prev').mouseout(function(){
+       t=setInterval(function(){runs()},2000);
+   })
+   //鼠标经过和移开数字小标时
+   $('#ous li').mouseover(function(){
+       $(this).addClass('ls').siblings().removeClass('ls');
+       var index=$(this).index();
+       console.log(index);
+       var arr=[0,-1000,-2000,-3000,-4000];//预先定义#oul的left值;[每张图片最左边的开始位置];
+       //判断index的值
+       switch(index){
+           case 0:
+               $('#oul').css('left',arr[0]+'px');
+               break;
+           case 1:
+               $('#oul').css('left',arr[1]+'px');
+               break;
+           case 2:
+               $('#oul').css('left',arr[2]+'px');
+               break;
+           case 3:
+               $('#oul').css('left',arr[3]+'px');
+               break;
+           case 4:
+               $('#oul').css('left',arr[4]+'px');
+               break;
+       }
+       clearInterval(t);
+   })
+   $('#ous li').mouseout(function(){
+       //启动定时器
+       t=setInterval(function(){runs()},2000);
+   })
+   //runs();轮播改变left值;
+   function runs(x){
+       if(x==0){
+           left=left+1000;
+           if(left>0){
+               left=-4000;
+           }
+       }else{
+           left=left-1000;
+           if(left<-4000){
+               left=0;
+           }
+       }
+       $('#oul').css('left',left+'px');
+       check(left);
+   }
+   //banner与数字标对应
+   function check(left){
+       var arr=[0,-1000,-2000,-3000,-4000];//预先定义#oul的left值;[每张图片最左边的开始位置];
+       switch(left){
+           case arr[0]:
+               $('#ous li').eq(0).addClass('ls').siblings().removeClass('ls');
+               break;
+           case arr[1]:
+               $('#ous li').eq(1).addClass('ls').siblings().removeClass('ls');
+               break;
+           case arr[2]:
+               $('#ous li').eq(2).addClass('ls').siblings().removeClass('ls');
+               break;
+           case arr[3]:
+               $('#ous li').eq(3).addClass('ls').siblings().removeClass('ls');
+               break;
+           case arr[4]:
+               $('#ous li').eq(4).addClass('ls').siblings().removeClass('ls');
+               break;
+       }
+
+   }
+</script>
+</body>
+</html>

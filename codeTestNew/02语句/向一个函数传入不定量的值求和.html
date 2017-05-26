@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>不定项值</title>
+	<script>
+		doucment.addEventListener('DOMContentLoaded',()=>{
+			var input = document.querySelector('input');
+			var btnCount= input.nextElementSibling;
+			var output = btnCount.nextElementSibling;
+
+			btnCount.onclick=()=>{
+				//获取输入的值
+				var _input = input.value;
+
+				//传入参数??1.获取输入的数值2.切割数组
+
+				//循环相加sum函数里面的参数
+				var res = 0;
+				function sum(a,b,c,d,e,f,g,h,i,j,k,){
+					for(var i = 0;i<arguments.length;i++){
+						res+= sum[i];
+					}
+					console.log(res)
+				}
+
+
+			}
+		})
+	</script>
+</head>
+<body>
+	<h4>定义一个输入框 输入多个数值 以逗号隔开 </h4>
+	<input type="text">
+	<button>计算</button>
+	<div></div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	*{margin: 0;padding: 0;}
+		#box{width: 350px;height: 150px;border: 2px solid #000;position: absolute;}
+		h2{border-bottom: 2px solid #000;height: 30px;line-height: 30px;text-align: center;background-color: #efefef;padding: 5px;cursor: move;}
+		span{position: absolute;top: 0;right: 0;padding: 5px;display: block;}
+		span:hover{background-color: red;cursor: pointer;}
+	</style>
+	<script>
+		document.addEventListener('DOMContentLoaded',function(){
+			var box = document.querySelector('#box');
+			var span = document.querySelector('span');
+
+			var header = document.querySelector('h2')
+			span.onclick = function(){
+				box.style.display = 'none';
+			}
+			//header点击拖动效果
+			header.onmousedown = function(e){
+				var ox = e.offsetX;
+				var oy = e.offsetY;
+				header.onmousemove = function(evt){
+					evt.preventDefault();
+					box.style.top = evt.clientY -oy+'px';
+					box.style.left = evt.clientX -ox+'px';
+				}
+			}
+			document.onmouseup =function(e){
+				header.onmousemove='';
+			}
+
+			//改变元素宽高 
+			//	先记录document点击时候的位置x/y
+			//	拖动时改变宽高
+			//	鼠标松开清空???
+			document.onmousedown = function(){
+				var sx = document.cliextX;
+				var sy = document.clientY
+				document.onmousemove = function(e){
+					box.style.width = box.offsetX-box.clientLeft;
+					box.style.height = box.offsetY-box.clientTop;
+				}
+			}
+		})
+	</script>
+</head>
+<body>
+	<div id="box">
+		<h2>可拖动header</h2>
+		<span>&times;</span>
+	</div>
+</body>
+</html>

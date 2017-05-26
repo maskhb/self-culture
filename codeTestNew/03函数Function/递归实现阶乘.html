@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>递归阶乘</title>
+	<script>
+		document.addEventListener('DOMContentLoaded',()=>{
+			var num = document.querySelector('input');
+			var btn = document.querySelector('button');
+			var output = document.querySelector('div');
+
+			btn.onclick=function(){
+				var _num = num.value
+				output.innerHTML= factoria(_num)
+			}
+			function factoria(e){
+				if(e==1){
+					return 1;
+				}
+				return e*factoria(e-1)
+			}
+		})
+	</script>
+</head>
+<body>
+	<input type="number">
+	<button>计算阶乘</button>
+	<div></div>
+</body>
+</html>

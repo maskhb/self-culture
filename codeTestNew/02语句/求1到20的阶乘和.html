@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>求1!+2!+3!+4!+5!…20!</title>
+	<script>
+		var sum = 0
+		//外层求和
+		for(i=1;i<=20;i++){
+			//内层计算阶乘
+			var fac = 1
+			for(j=1;j<=i;j++){
+				fac*=j
+			}
+			sum+=fac
+		}
+		document.write(sum)
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

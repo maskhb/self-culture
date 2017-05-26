@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		ul{padding:0;margin:0;list-style:none;}
+		.carousel{position:relative;margin:0 auto;width:810px;height:320px;overflow:hidden;}
+		.carousel ul{position:relative;left:0;top:0;}
+		 li{height:320px;overflow:hidden;}
+		.page{position: absolute;right:15px;bottom:15px;}
+		.page span{display:inline-block;margin:0 5px;width:30px;height:30px;line-height:30px;text-align:center;background-color:#efefef;border-radius:50%;}
+		.page span.active{background-color:#f60;color:#fff;}
+
+		.prev,.next{position: fixed;width:30px;height:50px;line-height:50px;background-color:#f60;color:#fff;text-align:center;}
+		.prev{left:235px;top:-351px;bottom:0;margin:auto 0;}
+		.next{right:235px;top:161px;margin-top:-25px;}
+	</style>
+	<script src="../jquery-3.2.1.min.js"></script>
+	<script src = 'lib/jquery.hbcarousel.js'></script>
+	<script>
+		$(function(){
+			$('.box').hbcarousel({
+				imgs:['img/001.jpg','img/002.jpg','img/003.jpg','img/004.jpg'],
+				//显示小图
+				smallPic:false,
+				// 显示按键
+				buttons:false,
+				// 设置间隔时间
+				duration:1000,
+				// 轮播类型: fade:淡入淡出, vertial:垂直滚动, horizontal:水平滚动, show:幻灯片
+				type:'vertial'
+			}).show()
+		})
+	</script>
+</head>
+<body>
+	<div class="box">
+	</div>
+</body>
+</html>

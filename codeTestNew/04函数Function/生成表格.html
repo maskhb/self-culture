@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>生成表格</title>
+    <style>
+    body {
+        padding: 20px;
+    }
+    
+    table {
+        width: 100%;
+        border: 1px solid #ddd;
+        border-collapse: collapse;
+    }
+    
+    th,
+    td {
+        border: 1px solid #ddd;
+        padding: 5px 10px;
+    }
+    </style>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        //获取元素
+        var numRow = document.querySelector('input');
+        var numCel = numRow.nextElementSibling;
+        var btnShow = document.querySelector('button');
+        var container = document.querySelector('div');
+
+        //绑定点击事件
+        btnShow.onclick = function() {
+            var _row = numRow.value;
+            var _cell = numCel.value;
+
+            // 生成表格 把代码写入#container
+            container.innerHTML = createTable(_row, _cell);
+            console.log(666)
+        }
+
+        function createTable(r, c) {
+            var res = '<table>'
+                //外层循环生成行
+            for (var i = 1; i <= r; i++) {
+                res += '<tr>'
+                    //内层循环控制列
+                for (var j = 1; j <= c; j++) {
+                    var bgColor = getRandomColor();
+                    res += '<td style=background-color:' + bgColor + '>单元格' + i + '行' + j + '列</td>'
+                }
+                // 结束tr标签
+                res += '</tr>';
+            }
+            // 结束table标签
+            res += '</table>';
+
+            return res;
+        }
+
+        // 生成随机颜色
+        // rgb(255,255,55)
+        // btnRender.style = 'background-color:rgb(0,255,0)';
+
+        function getRandomColor() {
+            var r = getRandomNumber(0, 255);
+            var g = getRandomNumber(0, 255);
+            var b = getRandomNumber(0, 255);
+
+            return 'rgb(' + r + ',' + g + ',' + b + ')';
+        }
+
+        function getRandomNumber(min, max) {
+            var res = parseInt(Math.random() * (max - min + 1) + min);
+            return res
+        }
+    })
+    </script>
+</head>
+
+<body>
+    <input type="number" placeholder="row">行;
+    <input type="number" placeholder="cel">列;
+    <button>生成</button>
+    <div>
+    	<!-- <table>
+    		<tr>
+    			<td></td>  分析结构:1 外层循环+内层循环
+    			<td></td>			2 td在哪里开始?哪里结束
+    			<td></td>			3 table在哪里结束
+    			<td></td>
+    		</tr>
+    		<tr>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    		</tr>
+    		<tr>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    		</tr>
+    		<tr>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    			<td></td>
+    		</tr>
+
+    	</table>
+
+    	 -->
+    </div>
+</body>
+
+</html>

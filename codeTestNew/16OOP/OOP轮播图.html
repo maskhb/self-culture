@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>09面向对象的轮播图</title>
+		<style>
+			ul {
+				padding: 0;
+				margin: 0;
+				list-style: none;
+			}
+			
+			.carousel {
+				position: relative;
+				margin: 0 auto;
+				width: 810px;
+				height: 320px;
+				overflow: hidden;
+			}
+			
+			.carousel ul {
+				position: relative;
+				left: 0;
+				top: 0;
+			}
+			
+			li {
+				height: 320px;
+				overflow: hidden;
+			}
+			
+			.page {
+				position: absolute;
+				right: 15px;
+				bottom: 15px;
+			}
+			
+			.page span {
+				display: inline-block;
+				margin: 0 5px;
+				width: 30px;
+				height: 30px;
+				line-height: 30px;
+				text-align: center;
+				background-color: #efefef;
+				border-radius: 50%;
+			}
+			
+			.page span.active {
+				background-color: #f60;
+				color: #fff;
+			}
+			
+			.prev,
+			.next {
+				position: absolute;
+				width: 30px;
+				height: 50px;
+				line-height: 50px;
+				background-color: #f60;
+				color: #fff;
+				text-align: center;
+			}
+			
+			.prev {
+				left: 0;
+				top: 0;
+				bottom: 0;
+				margin: auto 0;
+			}
+			
+			.next {
+				right: 0;
+				top: 50%;
+				margin-top: -25px;
+			}
+		</style>
+		<script src="../common.js"></script>
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				/*
+					面向对象的轮播图
+				 */
+				var carousel = {
+					//属性：有什么
+
+					// 图片路径
+					img: ['img/001.jpg', 'img/002.jpg', 'img/003.jpg', 'img/004.jpg'],
+					width: 810,
+					height: 320,
+
+					// 滚动间隔时间
+					duration: 1000,
+
+					// 当前索引值（默认0）
+					index: 0,
+
+					// 是否显示分页
+					showPage: true,
+
+					//方法：能做什么
+
+					// 初始化函数
+					// 1）生成DOM节点
+					// 2）绑定事件
+					init: function() {
+						var lbt = document.createElement('div');
+						lbt.classList.add('carousel');
+
+						var ul = document.createElement('ul');
+
+						ul.innerHTML = this.img.map((url) => {
+							return `<li><img src="${url}"></li>`;
+						}).join('');
+
+						lbt.appendChild(ul);
+
+						// 显示分页
+						if(this.showPage) {
+							var page = document.createElement('div');
+							page.className = 'page';
+							//<div class="page"><span>1</span><span>2</span></div>
+
+							page.innerHTML = this.img.map((url, idx) => {
+					if(idx === 0) {
+									return `<span class="active">${idx+1}</span>`;
+								}
+								return `<span>${idx+1}</span>`;
+							}).join('');
+
+							lbt.appendChild(page);
+
+							// 传递page
+							this.page = page;
+
+						}
+
+						// 左右按钮
+						var btnPrev = document.createElement('div');
+						btnPrev.className = 'prev';
+						btnPrev.innerHTML = '&lt;';
+						var btnNext = document.createElement('div');
+						btnNext.className = 'next';
+						btnNext.innerHTML = '&gt;';
+						lbt.appendChild(btnNext);
+						lbt.appendChild(btnPrev);
+
+						// 前一张/后一张
+						btnPrev.onclick = () => {
+							this.index--;
+
+							this.show();
+						}
+						btnNext.onclick = () => {
+							this.index++;
+
+							this.show();
+						}
+						
+
+						// 鼠标移入停止定时器
+						lbt.onmouseenter = () => {
+							this.stop();
+						}
+						lbt.onmouseleave = () => {
+							this.start();
+						}
+
+						document.body.appendChild(lbt);
+
+						// 利用this来传递ul
+						this.list = ul;
+
+					},
+
+					// 开始轮播
+					start: function() {
+						this.timer = setInterval(() => {
+							this.index++;
+
+							this.show();
+						}, this.duration);
+					},
+
+					//停止轮播图
+					stop: function() {
+						clearInterval(this.timer);
+					},
+
+					// 图片显示
+					show: function() {
+						if(this.index < 0) {
+							this.index = this.img.length - 1;
+						} else if(this.index > this.img.length - 1) {
+							this.index = 0;
+						}
+
+						// 如何在这里获取ul
+						animate(this.list, {
+							top: -this.index * this.height
+						});
+
+						// 高亮显示页码
+						if(this.showPage) {
+							for(var i = 0; i < this.page.children.length; i++) {
+								this.page.children[i].classList.remove('active');
+							}
+							this.page.children[this.index].className = 'active';
+						}
+					}
+				}
+
+				carousel.init();
+				carousel.start();
+			});
+		</script>
+	</head>
+
+	<body>
+	</body>
+
+</html>

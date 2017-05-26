@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		img{width: 200px;position: absolute;}
+	</style>
+</head>
+<body>
+	<img src="img/car.jpg" alt="">
+	<script>
+		var img = document.images[0];
+		var speed = 70;
+		var timer = setInterval(function(){
+			var left =img.offsetLeft ;
+			speed-=3
+			if(speed<=1){
+				speed=0;
+				clearInterval(timer)
+			}
+			img.style.left = left + speed + 'px'
+		},20)
+	</script>
+</body>
+</html>

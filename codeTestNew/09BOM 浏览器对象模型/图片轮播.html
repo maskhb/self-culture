@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>图片轮播</title>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        var img = document.querySelector('img');
+        var btn = document.querySelector('button');
+        var btnPrev = btn.nextElementSibling;
+        var btnNext = btnPrev.nextElementSibling;
+
+        var time = 1;
+        var timer = setInterval(carousel, 1000)
+
+
+        //封装轮播函数
+        function carousel() {
+            time++;
+            if (time > 5) {
+                time = 1
+            }
+            img.src = "../08Math&Date/img/g" + time + ".jpg"
+        }
+        //暂停或者继续
+        btn.onclick = function() {
+            if (timer) {
+                clearInterval(timer);
+                timer = undefined;//覆盖清除 防止其他函数内部的timer
+                btn.innerHTML = "继续";
+            } else {
+                timer = setInterval(carousel, 1000);
+                btn.innerHTML = "暂停";
+            }
+        }
+
+        //鼠标移入暂停 移出继续
+        img.onmouseenter = function() {
+                clearInterval(timer);
+                timer = undefined;
+                btn.innerHTML = "继续";
+            } 
+        img.onmouseout = function(){
+                timer = setInterval(carousel, 1000);
+                btn.innerHTML = "暂停";
+            }
+
+
+
+
+
+
+        //上一张/下一张效果
+        btnPrev.onclick = function() {
+            time--;
+            if (time < 1) {
+                time = 5;
+            }
+            img.src = "../08Math&Date/img/g" + time + ".jpg"
+        }
+
+        btnNext.onclick = function() {
+            time++
+            if (time > 5) {
+                time = 1
+            }
+            img.src = "../08Math&Date/img/g" + time + ".jpg"
+        }
+    })
+    </script>
+</head>
+
+<body>
+    <img src="../08Math&Date/img/g1.jpg">
+    <button>暂停</button>
+    <button>&lt;</button>
+    <button>&gt;</button>
+</body>
+
+</html>

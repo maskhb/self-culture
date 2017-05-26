@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>求两个数的最大数；</title>
+	<script>
+		document.addEventListener('DOMContentLoaded',()=>{
+			var num1 = document.querySelector('input');
+			var num2 = num1.nextElementSibling;
+			var btnCheck = document.querySelector('button');
+
+			btnCheck.onclick=function(){
+				var _num1=num1.value;
+				var _num2=num2.value;
+				if(_num1>_num2){
+					alert(_num1+"大于"+_num2)
+				}else if(_num1<_num2){
+					alert(_num1+"小于"+_num2)
+				}else{
+					alert(_num1+"等于"+_num2)
+				}
+			}
+		})
+	</script>
+</head>
+<body>
+	<input type="number" placeholder="NUM1">
+	<input type="number" placeholder="NUM2">
+	<button>
+		比较
+	</button>
+</body>
+</html>

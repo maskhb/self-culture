@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		textarea{
+			display: block;width: 309px;height: 50px;
+		}
+		li{
+			list-style: none;
+		}
+	</style>
+	<script>
+	document.addEventListener('DOMContentLoaded', () =>{
+        var msg = document.querySelector('textarea');
+        var btn = document.querySelector('button');
+        var output = document.querySelector('div');
+
+
+        var data = [
+            'hahahahahahahaha1',
+           	'hahaha22222222222',
+            'hahaha33333333333',
+            'hahaha44444444444'
+        ]
+
+        btn.onclick = function() {
+            var _msg = msg.value; //获得输入的值
+            data.unshift(_msg)
+            insert(); //输入的东西写入页面
+        }
+
+        function insert() {
+            var ul = '<ul>';
+            for (var i = 0; i < data.length; i++) {
+            	// 只显示5条
+				if(i === 5){
+					break;
+				}
+                ul+= '<li><a href="#">' + data[i] + '</li>'
+            }
+            ul+="</ul>"
+            output.innerHTML=ul
+        }
+
+        insert(); //进入页面先运行一次
+    })
+	</script>
+</head>
+<body>
+	<textarea></textarea>
+	<button>Insert</button>
+	<div>
+		<!-- <ul>
+			<li>
+				<a href="#"></a>
+			</li>
+			<li>
+				<a href="#"></a>
+			</li>
+			<li>
+				<a href="#"></a>
+			</li>
+			<li>
+				<a href="#"></a>
+			</li>
+			<li>
+				<a href="#"></a>
+			</li>
+
+		</ul> -->
+	</div>
+</body>
+</html>

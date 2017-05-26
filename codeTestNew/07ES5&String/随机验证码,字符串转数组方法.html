@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>生成4位随机数字字母组合的验证码</title>
+	<style>
+		div{
+			width: 100px;height:50px;background-color: #efefef;text-align: center;line-height: 50px;border: 3px solid #ccc;margin-top: 20px;
+		}
+	</style>
+	<script>
+	document.addEventListener('DOMContentLoaded',function(){
+		var btn = document.querySelector('button');
+		var output = document.querySelector('div');
+		var data = 'abcdefghigklmnopqrstuvwxyz0123456789';
+
+		btn.onclick = function(){
+			//String格式的data转换成Array类型
+			var dataNew =new Array();
+			for(i=0;i<data.length;i++){
+				dataNew[i] = data[i]
+			}
+			// console.log(dataNew);
+
+			var res = ''
+			for(i=0;i<4;i++){
+				var rdIdx = Math.floor(Math.random()*dataNew.length);//随机下标
+				res += data[rdIdx]
+			}
+			output.innerHTML = res
+		}
+	})
+	</script>
+</head>
+<body>
+<button>set</button>
+	<div></div>
+</body>
+</html>

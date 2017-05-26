@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>login</title>
+    <style type="text/css">
+    body {
+        background-color: rgb(177, 208, 224);
+        font: normal 12px Trebuchet MS;
+        color: #000;
+    }
+    
+    .roundedCorners {
+        width: 350px;
+        padding: 10px;
+        background-color: #DDEEF6;
+        box-shadow: 0px 0px 10px 0px #888888;
+        border: 1px solid #DDEEF6;
+        border-radius: 6px;
+        margin: auto;
+    }
+    
+    .roundedCorners-textbox {
+        border: 1px solid #999;
+        width: 250px;
+    }
+    
+    .checkbox {
+        margin-left: 30px;
+        border: 1px solid #999;
+        width: 20px;
+    }
+    
+    .label {
+        display: inline-block;
+        width: 50px;
+        text-align: center;
+    }
+    
+    .default {
+        color: grey;
+        font-size: 12px;
+    }
+    
+    .input {
+        color: grey;
+        font-size: 12px;
+    }
+    div{
+			width: 400px;
+			padding: 20px;
+			margin: 50px auto;
+			font-size: 18px;
+			background: lightgray;
+			border-radius:6px;
+			border:1px solid #bbb; 
+			box-shadow: 0px 0px 10px 0px #888888;
+		}
+		.lable {
+			display: inline-block;
+			width: 90px;
+			text-align: center;
+		} 
+		input{ 
+			border:1px solid #999; 
+			width:250px;
+			padding: 5px;
+
+	    }
+	    p{
+	    	width: 261px;
+	    	height: 24px;
+	    	background: #bbb;
+	    	margin-left: 100px;
+	    	border: 1px solid #888;
+	    	line-height: 24px;
+	    	position: relative;
+	    	text-align: center;
+	    }
+	    p>b{
+	    	position: absolute;
+	    	top: 0;
+	    	left: -90px;
+	    }
+	    p :nth-child(2){
+	    	display: block;
+	    	float: left;
+	    	width: 85px;
+	    	height: 100%;
+			border:1px solid #fff;
+	    }
+	    p :nth-child(3){
+	    	display: block;
+	    	float: left;
+	    	width: 85px;
+	    	height: 100%;
+			border:1px solid #fff;
+	    }
+	    p :nth-child(4){
+	    	display: block;
+	    	float: left;
+	    	width: 85px;
+	    	height: 100%;
+			border:1px solid #fff;
+	    }
+		button{
+			width: 60px;
+			height: 30px;
+			line-height: 26px;
+			font-size: 18px;
+
+			
+		}
+    </style>
+</head>
+<script>
+window.onload = function() {
+    var btnCheck = document.getElementById('btnCheck');
+    btnCheck.onclick = function(e) {
+        e = e || window.event;
+        /*
+        登录名
+		必填
+		数字或字母组合
+		不能少于3位
+        */
+        var _username = document.getElementById('username').value;
+        if (!/^[\da-z]{3,}$/.test(_username)) {
+            alert('登录名不合法');
+            return false;
+        }
+        var _nickname = document.getElementById('nickname').value;
+        // 中英文皆可
+        if (!/^[\u2E80-\u9FFFa-zA-Z]+$/.test(nickname.value)) {
+            alert('昵称不合法');
+            return false;
+        }
+
+        var _email = document.getElementById('email').value;
+        if (!/^[\w\-\.]+@[a-z\d\-]+(\.[a-z]+){1,2}$/.test(_email)) {
+            alert('你输入的邮箱不合法');
+            return false;
+        }
+
+        /*
+        
+        密码
+			必填
+			至少6位
+			显示密码强度
+			弱：只有数字
+			一般：数字字母组合
+			强：数字字母特殊字符组合
+         */
+        var psw = document.getElementById('password').value;
+        //密码强度
+			// 弱：只有数字
+			// 一般：数字字母组合
+			// 强：数字字母特殊字符组合
+				password.oninput = function(){
+					//纯数字判断
+					if(/^\d{6,}$/.test(password.value) || 
+					//纯字母判断
+					/^[a-zA-Z]{6,}$/.test(password.value)){
+						
+						span[0].style.background = 'red';
+						span[0].innerHTML = '弱';
+						span[1].style.background = '';
+						span[1].innerHTML = '';
+						span[2].style.background = '';
+						span[2].innerHTML = '';
+
+					}else if(
+						// 6位以上数字或字母组合
+						/^[0-9a-zA-Z]{6,}$/.test(password.value) && 
+						// 有数字
+						/[0-9]+/.test(password.value) &&
+						// 有字母
+						/[a-zA-Z]+/.test(password.value)){
+						
+						span[0].style.background = 'orange';
+						span[0].innerHTML = '';
+						span[1].style.background = 'orange';
+						span[1].innerHTML = '一般';
+						span[2].style.background = '';
+						span[2].innerHTML = '';
+
+					}else if(
+
+						/^.{6,}$/.test(password.value) &&// 6位以上任意字符
+						/[0-9]+/.test(password.value) &&  // 有数字
+						/[a-zA-Z]+/.test(password.value) && // 有字母
+						/\S+/.test(password.value)    // 空格以外的字符
+						){
+
+						span[0].style.background = 'lightgreen';
+						span[0].innerHTML = '';
+						span[1].style.background = 'lightgreen';
+						span[1].innerHTML = '';
+						span[2].style.background = 'lightgreen';
+						span[2].innerHTML = '高';
+					}else{
+						span[0].style.background = '';
+						span[0].innerHTML = '';
+						span[1].style.background = '';
+						span[1].innerHTML = '';
+						span[2].style.background = '';
+						span[2].innerHTML = '';
+					}
+				}
+
+
+    }
+
+}
+</script>
+
+<body>
+    <form id="myform" action="http://www.baidu.com" method="get">
+        <div class="roundedCorners">
+            <label class="label">登录名</label>
+            <input id="username" type="text" placeholder="用户名只能用数字字母组合 不能少于3位" class="default roundedCorners-textbox" />
+            <br />
+            <br />
+            <label class="label">昵称</label>
+            <input id="nickname" type="text" class="roundedCorners-textbox" />
+            <br />
+            <br />
+            <label class="label">电子邮件</label>
+            <input id="email" type="text" class="roundedCorners-textbox" />
+            <br />
+            <br />
+            <label class="lable">密码</label>
+			<input type="text" id="password" placeholder="至少六位"></br></br>
+			<p><b>密码强度</b><span></span><span></span><span></span></p> </br>
+			<button id="btn">提交</button>
+            <br />
+            <br />
+            <input type="submit" id="btnCheck" value="确定" />
+            <input type="reset" value="清空" />
+        </div>
+    </form>
+</body>
+
+</html>

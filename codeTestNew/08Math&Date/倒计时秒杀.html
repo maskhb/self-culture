@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>倒计时秒杀</title>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var info = document.querySelector('p');
+        var imgBuy = document.querySelector("#btnBuy");
+
+        /*
+        1>获取当前时间毫秒数 计算差值 换算天数
+        2>定时器每秒更新信息
+        3>差值为0 替换图片 清除定时器
+         */
+        showMs();
+
+        var timer = setInterval(showMs, 1000)
+
+        function showMs() {
+        	//ES5
+        	var buyTime = Date.parse('2017/4/14 11:20:20');
+        	var now = Date.now();
+
+        	var offsetTime = Math.floor((buyTime - now)/1000);
+
+        	var timeLeftsec = offsetTime%60;
+        	var timeLeftmin = Math.floor(offsetTime/60)%60;
+        	var timeLefthour = Math.floor(offsetTime/60/60/24);
+        	var timeLeftday = Math.floor(offsetTime/60/60/24);
+
+            info.innerHTML = '剩余时间' + timeLeftday + '天' + timeLefthour + '小时' + timeLeftmin + '分钟' + timeLeftsec + '秒';
+            if (offsetTime <= 0) {
+                imgBuy.src = 'img/btn_buy.jpg';
+                clearInterval(timer);
+                info.innerHTML ="正在抢购"
+            }
+        }
+    })
+    </script>
+</head>
+
+<body>
+    <p>抢购还没开始</p>
+    <img src="img/btn_buy0.jpg"  id="btnBuy"/>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>十六进制的随机颜色</title>
+	<script>
+		document.addEventListener('DOMContentLoaded',()=>{
+			var btnChange = document.querySelector('button');
+
+			btnChange.onclick=changeColor;
+
+			function changeColor(){
+				var res = '#'
+				var val = 'abcdef0123456789'
+				for(var i=0;i<6;i++){
+					var idx = Math.floor(Math.random()*val.length);
+					res+=val[idx]
+				}
+				console.log(res)
+				document.body.style.backgroundColor = res
+			} 
+
+		})
+	</script>
+</head>
+<body>
+	<button>更换</button>
+</body>
+</html>
